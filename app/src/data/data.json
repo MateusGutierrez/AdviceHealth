@@ -1,0 +1,110 @@
+{
+    "weekStatistics": [
+      {
+        "date": "2024-12-13",
+        "appointmentsToday": 25,
+        "patientsServedToday": 18,
+        "dailyRevenue": 4750.00,
+        "reminders": [
+          "Meeting with medical team at 2pm",
+          "Send financial reports by the end of the day",
+          "Review medical records of patients served"
+        ],
+        "dailySchedule": [
+          { "time": "08:00", "patientName": "João Silva", "doctorName": "Dra. Ana Pereira", "status": "served" },
+          { "time": "09:00", "patientName": "Maria Oliveira", "doctorName": "Dr. Carlos Andrade", "status": "scheduled" },
+          { "time": "10:00", "patientName": "José Santos", "doctorName": "Dra. Ana Pereira", "status": "served" },
+          { "time": "11:00", "patientName": "Carla Almeida", "doctorName": "Dra. Ana Pereira", "status": "scheduled" },
+          { "time": "13:00", "patientName": "Pedro Henrique", "doctorName": "Dr. Carlos Andrade", "status": "scheduled" },
+          { "time": "14:00", "patientName": "Rafael Lima", "doctorName": "Dra. Ana Pereira", "status": "scheduled" },
+          { "time": "15:00", "patientName": "Renata Farias", "doctorName": "Dr. Carlos Andrade", "status": "scheduled" }
+        ]
+      },
+      {
+        "date": "2024-12-14",
+        "appointmentsToday": 22,
+        "patientsServedToday": 16,
+        "dailyRevenue": 4200.00,
+        "reminders": [
+          "Review materials for Monday's meeting",
+          "Call equipment suppliers"
+        ],
+        "dailySchedule": [
+          { "time": "08:30", "patientName": "Helena Dias", "doctorName": "Dr. Carlos Andrade", "status": "scheduled" },
+          { "time": "09:30", "patientName": "Samuel Costa", "doctorName": "Dra. Ana Pereira", "status": "served" },
+          { "time": "10:30", "patientName": "Igor Freitas", "doctorName": "Dr. Carlos Andrade", "status": "served" },
+          { "time": "11:00", "patientName": "Livia Souza", "doctorName": "Dra. Beatriz Souza", "status": "scheduled" },
+          { "time": "13:30", "patientName": "Clara Mendes", "doctorName": "Dra. Ana Pereira", "status": "scheduled" },
+          { "time": "14:30", "patientName": "Vinícius Rocha", "doctorName": "Dr. Carlos Andrade", "status": "scheduled" }
+        ]
+      },
+      {
+        "date": "2024-12-15",
+        "appointmentsToday": 18,
+        "patientsServedToday": 12,
+        "dailyRevenue": 3600.00,
+        "reminders": [
+          "Check pending emails",
+          "Schedule office maintenance"
+        ],
+        "dailySchedule": [
+          { "time": "09:00", "patientName": "Paulo Ribeiro", "doctorName": "Dra. Ana Pereira", "status": "served" },
+          { "time": "10:00", "patientName": "Camila Silva", "doctorName": "Dr. Carlos Andrade", "status": "scheduled" },
+          { "time": "11:00", "patientName": "Gabriel Nunes", "doctorName": "Dra. Beatriz Souza", "status": "served" },
+          { "time": "14:00", "patientName": "Sophia Torres", "doctorName": "Dr. Carlos Andrade", "status": "scheduled" }
+        ]
+      },
+      {
+        "date": "2024-12-16",
+        "appointmentsToday": 20,
+        "patientsServedToday": 15,
+        "dailyRevenue": 4000.00,
+        "reminders": [
+          "Confirm material orders",
+          "Send weekly report"
+        ],
+        "dailySchedule": [
+          { "time": "08:00", "patientName": "Fernando Alves", "doctorName": "Dra. Ana Pereira", "status": "served" },
+          { "time": "09:00", "patientName": "Mariana Souza", "doctorName": "Dr. Carlos Andrade", "status": "scheduled" },
+          { "time": "10:00", "patientName": "Roberto Lima", "doctorName": "Dra. Beatriz Souza", "status": "served" },
+          { "time": "11:30", "patientName": "Alice Ribeiro", "doctorName": "Dra. Ana Pereira", "status": "scheduled" },
+          { "time": "13:00", "patientName": "Lucas Costa", "doctorName": "Dr. Carlos Andrade", "status": "scheduled" },
+          { "time": "14:30", "patientName": "Julia Freitas", "doctorName": "Dra. Ana Pereira", "status": "scheduled" },
+          { "time": "15:30", "patientName": "Henrique Mendes", "doctorName": "Dr. Carlos Andrade", "status": "scheduled" }
+        ]
+      }
+    ],
+    "doctorsSchedule": [
+      {
+        "doctorName": "Dra. Ana Pereira",
+        "specialty": "Cardiology",
+        "weeklyAvailableSlots": {
+          "2024-12-13": ["11:00", "14:00", "16:00", "17:00"],
+          "2024-12-14": ["09:00", "13:30", "15:00"],
+          "2024-12-15": ["08:30", "11:30", "16:30"],
+          "2024-12-16": ["08:00", "11:30", "14:30", "16:30"]
+        }
+      },
+      {
+        "doctorName": "Dr. Carlos Andrade",
+        "specialty": "Dermatology",
+        "weeklyAvailableSlots": {
+          "2024-12-13": ["09:30", "11:30", "13:30", "15:30"],
+          "2024-12-14": ["10:00", "12:30", "14:30", "16:30"],
+          "2024-12-15": ["08:00", "10:00", "12:00", "14:00"],
+          "2024-12-16": ["09:00", "13:00", "15:30", "17:30"]
+        }
+      },
+      {
+        "doctorName": "Dra. Beatriz Souza",
+        "specialty": "Pediatrics",
+        "weeklyAvailableSlots": {
+          "2024-12-13": ["10:30", "12:00", "14:30"],
+          "2024-12-14": ["09:30", "11:30", "15:30"],
+          "2024-12-15": ["08:30", "10:30", "12:30", "14:30"],
+          "2024-12-16": ["10:00", "12:00", "14:00", "16:00"]
+        }
+      }
+    ]
+  }
+  

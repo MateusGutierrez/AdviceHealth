@@ -1,10 +1,8 @@
-import { CardBody } from "react-bootstrap"
+import { DashboardContainer } from "../components/dashboardContainer";
 
 const Dashboard = () => {
     return (
-        <CardBody>
-            Dashboard
-        </CardBody>
+        <DashboardContainer/>
     )
 }
 export default Dashboard;

@@ -1,5 +1,6 @@
 enum paths {
-    dashboard = '/',
+    home = '/',
+    dashboard = '/dashboard',
     scheduling = '/scheduling',
     schedulingView = '/scheduling_view'
   }
