@@ -4,50 +4,63 @@ import { useStore } from "../../store"
 import DatePicker from "../datePicker"
 import { StyledDashboardContainer } from "./styled"
 import { Card, CardContent, Typography } from "@mui/material"
-import useDailyStatistic from "../../hooks/useDailyStatistic"
+import useDailySchedule from "../../hooks/useDailySchedule"
 import ScheduledTable from "../table"
 import Chart from "../charts"
+import useIsWeekDataEmpy from "../../hooks/useIsWeekDataEmpy"
+import useDailyStatistic from "../../hooks/useDailyStatistic"
 
 export const DashboardContainer = () => {
-    const {date} = useStore(state => state)
+    const {date, } = useStore(state => state)
     const reminders = useRemindersByDate(new Date(date))
+    const schedule = useDailySchedule(new Date(date))
+    const isWeekDataEmpty = useIsWeekDataEmpy(new Date(date))
     const statistic = useDailyStatistic(new Date(date))
-
+    
     return (
         <StyledDashboardContainer>
             <section id="main">
                 <h5>Dashboard</h5>
-                <div id="content">
-                    <Card id="reminder">
-                        <h6>Reminders</h6>
-                        {map(reminders, ((reminder, index) => {
-                            return (
-                                <Typography key={index}>{reminder}</Typography>
-                            )
-                        }))}
-                    </Card>
-                    <div id="statistics">
-                        <Card>
-                            <CardContent className="d-flex justify-content-between">
-                                <Typography>Daily revenue:</Typography>
-                                <Typography>R$ {statistic?.dailyRevenue}</Typography>
-                            </CardContent>
-                        </Card>
-                        <Card>
-                            <CardContent className="d-flex justify-content-between">
-                                <Typography>Patients served today:</Typography>
-                                <Typography>{statistic?.patientsServedToday} <i className="bi bi-people-fill"/></Typography>
-                            </CardContent>
-                        </Card>
-                        <Card>
-                            <CardContent className="d-flex justify-content-between">
-                                <Typography>Appointments today:</Typography>
-                                <Typography>{statistic?.appointmentsToday}<i className="bi bi-calendar-fill" id="calendar-icon"/></Typography>
-                            </CardContent>
-                        </Card>
+                {isWeekDataEmpty ? (
+                    <div className="d-flex">
+                        <Typography>There are no appointments scheduled for this day.</Typography>
+                        <i className="bi bi-calendar-heart-fill mx-lg-1"/>
                     </div>
-                </div>
-                <ScheduledTable schedule={statistic?.dailySchedule} />
+                ):(
+                    <>
+                        <div id="content">
+                                <Card id="reminder">
+                                    <h6>Reminders</h6>
+                                    {map(reminders, ((reminder, index) => {
+                                        return (
+                                            <Typography key={index}>{reminder}</Typography>
+                                        )
+                                    }))}
+                                </Card>
+                                <div id="statistics">
+                                    <Card>
+                                        <CardContent className="d-flex justify-content-between">
+                                            <Typography>Daily revenue:</Typography>
+                                            <Typography>R$ {statistic?.dailyRevenue}</Typography>
+                                        </CardContent>
+                                    </Card>
+                                    <Card>
+                                        <CardContent className="d-flex justify-content-between">
+                                            <Typography>Patients served today:</Typography>
+                                            <Typography>{statistic?.patientsServedToday} <i className="bi bi-people-fill" /></Typography>
+                                        </CardContent>
+                                    </Card>
+                                    <Card>
+                                        <CardContent className="d-flex justify-content-between">
+                                            <Typography>Appointments today:</Typography>
+                                            <Typography>{statistic?.appointmentsToday}<i className="bi bi-calendar-fill" id="calendar-icon" /></Typography>
+                                        </CardContent>
+                                    </Card>
+                                </div>
+                        </div>
+                        <ScheduledTable schedule={schedule?.dailySchedule} editable={false}/>
+                    </>
+                )}
             </section>
             <section>
                 <div id="calendar-container">

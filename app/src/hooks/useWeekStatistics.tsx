@@ -1,8 +1,8 @@
-import mockdata from "../data/data.json";
+import { useStore } from "../store";
 
 const useWeekStatistics = () => {
-  const data = mockdata.weekStatistics
-  return data;
+  const {weekStatistics} = useStore(state => state)
+  return weekStatistics;
 };
 
 export default useWeekStatistics;

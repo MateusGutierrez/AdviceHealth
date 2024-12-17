@@ -1,7 +1,7 @@
 {
     "weekStatistics": [
       {
-        "date": "2024-12-13",
+        "date": "2024-12-16",
         "appointmentsToday": 25,
         "patientsServedToday": 18,
         "dailyRevenue": 4750.00,
@@ -21,7 +21,7 @@
         ]
       },
       {
-        "date": "2024-12-14",
+        "date": "2024-12-17",
         "appointmentsToday": 22,
         "patientsServedToday": 16,
         "dailyRevenue": 4200.00,
@@ -39,7 +39,7 @@
         ]
       },
       {
-        "date": "2024-12-15",
+        "date": "2024-12-18",
         "appointmentsToday": 18,
         "patientsServedToday": 12,
         "dailyRevenue": 3600.00,
@@ -55,7 +55,7 @@
         ]
       },
       {
-        "date": "2024-12-16",
+        "date": "2024-12-19",
         "appointmentsToday": 20,
         "patientsServedToday": 15,
         "dailyRevenue": 4000.00,
@@ -78,6 +78,7 @@
       {
         "doctorName": "Dra. Ana Pereira",
         "specialty": "Cardiology",
+        "price": 350,
         "weeklyAvailableSlots": {
           "2024-12-13": ["11:00", "14:00", "16:00", "17:00"],
           "2024-12-14": ["09:00", "13:30", "15:00"],
@@ -88,6 +89,7 @@
       {
         "doctorName": "Dr. Carlos Andrade",
         "specialty": "Dermatology",
+        "price": 150,
         "weeklyAvailableSlots": {
           "2024-12-13": ["09:30", "11:30", "13:30", "15:30"],
           "2024-12-14": ["10:00", "12:30", "14:30", "16:30"],
@@ -97,7 +99,8 @@
       },
       {
         "doctorName": "Dra. Beatriz Souza",
-        "specialty": "Pediatrics",
+        "specialty": "Ophthalmologist",
+        "price": 290,
         "weeklyAvailableSlots": {
           "2024-12-13": ["10:30", "12:00", "14:30"],
           "2024-12-14": ["09:30", "11:30", "15:30"],

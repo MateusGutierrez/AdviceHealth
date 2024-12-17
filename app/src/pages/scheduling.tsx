@@ -1,10 +1,6 @@
-import { CardBody } from "react-bootstrap"
+import { SchedulingContainer } from "../components/schedulingContainer";
 
-const Scheduling = () => {
-    return (
-        <CardBody>
-            Scheduling
-        </CardBody>
-    )
-}
+const Scheduling = () => (
+    <SchedulingContainer />
+)
 export default Scheduling;

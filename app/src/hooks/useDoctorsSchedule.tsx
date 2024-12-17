@@ -1,8 +1,8 @@
-import mockdata from "../data/data.json";
+import { useStore } from "../store";
 
 const useDoctorsSchedule = () => {
-  const data = mockdata.doctorsSchedule
-  return data
+  const {doctorsSchedule} = useStore(state => state)
+  return doctorsSchedule
 };
 
 export default useDoctorsSchedule;
