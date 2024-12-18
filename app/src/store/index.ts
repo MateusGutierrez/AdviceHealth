@@ -27,25 +27,59 @@ export const useStore = create<Store>()(
       setDate: (date: Date) => set(() => ({ date })),
       schedule: initialScheduleValue(),
       addToSchedule: (newSchedule: Schedule) =>
-        set((state) => ({
-            schedule: state.schedule.map((currentSchedule) =>
-                currentSchedule.date === newSchedule.date
-                    ? {
-                          ...currentSchedule,
-                          dailySchedule: [
-                              ...currentSchedule.dailySchedule,
-                              ...(newSchedule.dailySchedule ?? []),
-                          ],
-                      }
-                    : currentSchedule
-            ),
-        })),
-      submitSchedule: (time: string, doctorName: string) => set((state) => ({
-        schedule: state.schedule.map((currentSchedule) => ({
-          ...currentSchedule,
-          dailySchedule: currentSchedule.dailySchedule.filter((entry) => entry.doctorName !== doctorName || entry.time !== time),
-        }))
-      })),
+        set((state) => {
+            const exists = state.schedule.some(
+                (currentSchedule) => currentSchedule.date === newSchedule.date
+            );
+            return {
+                schedule: exists
+                    ? state.schedule.map((currentSchedule) =>
+                          currentSchedule.date === newSchedule.date
+                              ? {
+                                    ...currentSchedule,
+                                    dailySchedule: [
+                                        ...currentSchedule.dailySchedule,
+                                        ...(newSchedule.dailySchedule ?? []),
+                                    ],
+                                }
+                              : currentSchedule
+                      )
+                    : [
+                          ...state.schedule,
+                          {
+                              date: newSchedule.date,
+                              dailySchedule: newSchedule.dailySchedule,
+                          },
+                      ],
+            };
+        }),
+      editSchedule: (id: string, updatedData: Partial<Schedule['dailySchedule'][number]>) =>
+          set((state) => ({
+            schedule: state.schedule.map((currentSchedule) => ({
+              ...currentSchedule,
+              dailySchedule: currentSchedule.dailySchedule.map((entry) =>
+                entry.id === id
+                  ? { ...entry, ...updatedData }
+                  : entry
+              ),
+            })),
+          })),        
+      submitSchedule: (time: string, doctorName: string) =>
+            set((state) => ({
+              doctorsSchedule: state.doctorsSchedule.map((doctor) =>
+                doctor.doctorName === doctorName
+                  ? {
+                      ...doctor,
+                      weeklyAvailableSlots: Object.fromEntries(
+                        Object.entries(doctor.weeklyAvailableSlots).map(([date, slots]) => [
+                          date,
+                          slots.filter((slot) => slot !== time),
+                        ])
+                      ),
+                    }
+                  : doctor
+              ),
+            })),
       removeFromSchedule: (id: string) => set((state) => ({
         schedule: state.schedule.map((currentSchedule) => ({
             ...currentSchedule,
@@ -56,8 +90,29 @@ export const useStore = create<Store>()(
       })),
       weekStatistics: mockdata.weekStatistics,
       doctorsSchedule: mockdata.doctorsSchedule,
+      destroyOneDayOffSchedule: (doctorName: string, day: string) =>
+        set((state) => ({
+          doctorsSchedule: state.doctorsSchedule.map((schedule) => {
+            if (schedule.doctorName === doctorName) {
+              const updatedWeeklySlots = Object.fromEntries(
+                Object.entries(schedule.weeklyAvailableSlots).filter(
+                  ([slotDay]) => slotDay !== day
+                )
+              );
+              return {
+                ...schedule,
+                weeklyAvailableSlots: updatedWeeklySlots,
+              };
+            }
+            return schedule;
+          }),
+        })),
       patientsData: [],
-      addPatientData: (newPatient: AddPatientToScheduleFormValue) => set((state) => ({ patientsData: [...state.patientsData, newPatient ]}))
+      addPatientData: (newPatient: AddPatientToScheduleFormValue) => set((state) => ({ patientsData: [...state.patientsData, newPatient ]})),
+      destroyPatientData: (id: string) => set((state) => ({patientsData: state.patientsData.filter((patient) => patient.id !== id)})),
+      updatePatientData: (updatedPatientData) => set((state) => ({patientsData: state.patientsData.map((patient) => patient.id === updatedPatientData.id ? updatedPatientData : patient),})),
+      dayOff: undefined,
+      setDayOff: (dayOff: Date) => set(() => ({ dayOff })),
     }),
     {
       name: 'session-health-storage',

@@ -1,4 +1,4 @@
-import { map } from "lodash"
+import { isEmpty, map } from "lodash"
 import useRemindersByDate from "../../hooks/useRemindersByDate"
 import { useStore } from "../../store"
 import DatePicker from "../datePicker"
@@ -11,12 +11,12 @@ import useIsWeekDataEmpy from "../../hooks/useIsWeekDataEmpy"
 import useDailyStatistic from "../../hooks/useDailyStatistic"
 
 export const DashboardContainer = () => {
-    const {date, } = useStore(state => state)
+    const {date} = useStore(state => state)
     const reminders = useRemindersByDate(new Date(date))
-    const schedule = useDailySchedule(new Date(date))
+    const scheduleData = useDailySchedule(new Date(date))
     const isWeekDataEmpty = useIsWeekDataEmpy(new Date(date))
     const statistic = useDailyStatistic(new Date(date))
-    
+
     return (
         <StyledDashboardContainer>
             <section id="main">
@@ -31,34 +31,39 @@ export const DashboardContainer = () => {
                         <div id="content">
                                 <Card id="reminder">
                                     <h6>Reminders</h6>
-                                    {map(reminders, ((reminder, index) => {
+                                    {isEmpty(reminders) ? (
+                                        <>
+                                            <Typography>There are no reminders for this day. </Typography>
+                                        </>
+                                    ) : map(reminders, ((reminder, index) => {
                                         return (
                                             <Typography key={index}>{reminder}</Typography>
                                         )
-                                    }))}
+                                    }))
+                                    }
                                 </Card>
                                 <div id="statistics">
                                     <Card>
                                         <CardContent className="d-flex justify-content-between">
                                             <Typography>Daily revenue:</Typography>
-                                            <Typography>R$ {statistic?.dailyRevenue}</Typography>
+                                            <Typography> R$ {statistic?.dailyRevenue ?? "Waiting Payment"}</Typography>
                                         </CardContent>
                                     </Card>
                                     <Card>
                                         <CardContent className="d-flex justify-content-between">
                                             <Typography>Patients served today:</Typography>
-                                            <Typography>{statistic?.patientsServedToday} <i className="bi bi-people-fill" /></Typography>
+                                            <Typography>{statistic?.patientsServedToday ?? scheduleData?.dailySchedule.length} <i className="bi bi-people-fill" /></Typography>
                                         </CardContent>
                                     </Card>
                                     <Card>
                                         <CardContent className="d-flex justify-content-between">
                                             <Typography>Appointments today:</Typography>
-                                            <Typography>{statistic?.appointmentsToday}<i className="bi bi-calendar-fill" id="calendar-icon" /></Typography>
+                                            <Typography>{statistic?.appointmentsToday ?? scheduleData?.dailySchedule.length}<i className="bi bi-calendar-fill" id="calendar-icon" /></Typography>
                                         </CardContent>
                                     </Card>
                                 </div>
                         </div>
-                        <ScheduledTable schedule={schedule?.dailySchedule} editable={false}/>
+                        <ScheduledTable schedule={scheduleData?.dailySchedule} editable={false}/>
                     </>
                 )}
             </section>

@@ -5,14 +5,15 @@ import { AddPatientToScheduleFormValue, AddPatientToScheduleSchema } from "../..
 import { useCallback, useMemo, useState } from "react";
 import { filter, head, isEmpty, map } from 'lodash';
 import { useStore } from '../../store';
-import StyledForm from './StyledForm';
+import StyledForm from './StyledAddPatientToScheduleForm';
 import { v4 as uuidv4 } from 'uuid';
+import { toast } from 'react-toastify';
 
 interface Props{
   hide: () => void;
 }
 
-const AddPatientToScheduleForm = ({hide}: Props) => {
+const AddPatientToScheduleForm = ({hide, }: Props) => {
   const [doctor, setDoctor] = useState<string>('');
   const [selectedDay, setSelectedDay] = useState<string>('');
   const [selectedTime, setSelectedTime] = useState<string>('');
@@ -20,7 +21,7 @@ const AddPatientToScheduleForm = ({hide}: Props) => {
   const { doctorsSchedule, addPatientData, submitSchedule, addToSchedule } = useStore(state => state);
 
   const { handleSubmit, register, formState: { errors } } = useForm<AddPatientToScheduleFormValue>({
-    resolver: zodResolver(AddPatientToScheduleSchema)
+    resolver: zodResolver(AddPatientToScheduleSchema),
   });
 
   const onSubmit = useCallback((data: AddPatientToScheduleFormValue) => {
@@ -33,7 +34,9 @@ const AddPatientToScheduleForm = ({hide}: Props) => {
       doctorName: doctor, 
       status: data.status
     }]})
-    hide()
+    toast.success('Success !', { autoClose: 2500 });
+    hide();
+
   }, [addPatientData, addToSchedule, doctor, hide, submitSchedule]);
 
   const handleDoctorChange = useCallback((event: SelectChangeEvent) => {
@@ -115,7 +118,7 @@ const AddPatientToScheduleForm = ({hide}: Props) => {
           </Select>
         </FormControl>
         <div id='name-container'>
-          <FormControl fullWidth disabled={!availableDays.length}>
+          <FormControl fullWidth disabled={isEmpty(availableDays)}>
             <InputLabel>Day</InputLabel>
             <Select value={selectedDay} {...register('day', {
               onChange(e) {
@@ -128,7 +131,7 @@ const AddPatientToScheduleForm = ({hide}: Props) => {
             </Select>
           </FormControl>
 
-          <FormControl fullWidth disabled={!availableTimes.length}>
+          <FormControl fullWidth disabled={isEmpty(availableTimes)}>
             <InputLabel>Time</InputLabel>
             <Select value={selectedTime} {...register('time', {
               onChange(e) {
@@ -154,7 +157,7 @@ const AddPatientToScheduleForm = ({hide}: Props) => {
           </FormControl>
       </div>
 
-      <Button type="submit" disabled={!selectedTime || !isEmpty(errors)}>Submit</Button>
+      <Button type="submit" disabled={!selectedTime || !isEmpty(errors)} className="bg-primary text-light">Submit</Button>
     </StyledForm>
   );
 };

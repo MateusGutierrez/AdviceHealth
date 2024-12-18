@@ -2111,6 +2111,13 @@ react-router@^7.0.2:
     set-cookie-parser "^2.6.0"
     turbo-stream "2.4.0"
 
+react-toastify@^11.0.0:
+  version "11.0.0"
+  resolved "https://registry.yarnpkg.com/react-toastify/-/react-toastify-11.0.0.tgz#6607ea55531012cbc4f78979ef6fb0501a4428b3"
+  integrity sha512-NLTt0hNNlVZPLnY+uzUvmE2H2jRHUpaPi7H3+84+3fMjZSpfngyL/r+2VcaepNItWuN0BCBiZdVluXixXYSFmw==
+  dependencies:
+    clsx "^2.1.1"
+
 react-transition-group@^4.4.5:
   version "4.4.5"
   resolved "https://registry.yarnpkg.com/react-transition-group/-/react-transition-group-4.4.5.tgz#e53d4e3f3344da8521489fbef8f2581d42becdd1"

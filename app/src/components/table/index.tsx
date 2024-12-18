@@ -4,6 +4,8 @@ import { dailySchedule } from '../../store/interface';
 import { map } from 'lodash';
 import { useStore } from '../../store';
 import { useCallback } from 'react';
+import WarningModal from '../modal/WaringModal';
+import EditModal from '../modal/EditModal';
 
 interface Props{
     schedule: dailySchedule[] | undefined;
@@ -37,8 +39,8 @@ const ScheduledTable = ({schedule, editable}: Props) => {
                                 {item.status}
                                 {editable ? (
                                     <div id='icon-container'>
-                                        <i className='bi bi-pencil-fill text-info' />
-                                        <i className='bi bi-trash-fill text-danger' onClick={() => destroy(item.id as string)}/>
+                                        <EditModal key={item.id} id={item.id as string} doctor={item.doctorName} time={item.time} status={item.status} patient={item.patientName}/>
+                                        <WarningModal destroy={() => destroy(item.id as string)}/>
                                     </div>
                                 ): null}
                             </td>

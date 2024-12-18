@@ -9,6 +9,7 @@ import useDailyStatistic from "../../hooks/useDailySchedule"
 import ScheduledTable from "../table"
 import useIsWeekDataEmpy from "../../hooks/useIsWeekDataEmpy"
 import BasicModal from "../modal"
+import DayOffModal from "../modal/DayOffModal"
 
 
 export const SchedulingContainer = () => {
@@ -45,13 +46,19 @@ export const SchedulingContainer = () => {
                         <i className="bi bi-calendar-heart-fill mx-lg-1"/>
                     </div>
                 ):(
-                    <>
-                        <div className="bg-secondary text-light" id="basic-modal-container">
-                            <Typography id="typotext">Schedule a new patient:</Typography>
-                            <BasicModal/>
+                    <div id="right-container">
+                        <div id="overflow-area">
+                                <div className="bg-primary text-light mb-3" id="basic-modal-container">
+                                    <Typography id="typotext">Schedule a new patient:</Typography>
+                                    <BasicModal/>
+                                </div>
+                                <div className="bg-secondary text-light mb-3" id="basic-modal-container">
+                                    <Typography id="typotext">Determine an absent day:</Typography>
+                                    <DayOffModal/>
+                                </div>
+                                <ScheduledTable editable={true} schedule={statistic?.dailySchedule}/>
                         </div>
-                        <ScheduledTable editable={true} schedule={statistic?.dailySchedule}/>
-                    </>
+                    </div>
                 )}
             </section>
         </StyledSchedulingContainer>

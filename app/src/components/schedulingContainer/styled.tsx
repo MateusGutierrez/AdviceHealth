@@ -25,6 +25,28 @@ const StyledSchedulingContainer = styled.div`
             border-radius: 4px;
         }
     }
+    #right-container{
+        height: 100%;
+        overflow: auto;
+        height: 100%;
+        overflow: auto;
+        #overflow-area{
+            height: 100%;
+            overflow: auto;
+        }
+        #overflow-area::-webkit-scrollbar{
+            width: 8px;
+            height: 8px;
+        }
+        #overflow-area::-webkit-scrollbar-thumb{
+            background: #007bff;
+            border-radius: 4px;
+        }
+        #overflow-area::-webkit-scrollbar-thumb:hover{
+            background: #0056b3;
+            border-radius: 4px;
+        }
+    }
     #main{
         width: 60%;
         border-radius: 15px;

@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 const StyledTableContainer = styled.div<{editable: boolean}>`
   max-height: ${({ editable }) => (editable ? "unset" : "50%")};
+  
   #overflow-area{
     height: 100%;
     overflow: auto;
@@ -25,7 +26,7 @@ const StyledTableContainer = styled.div<{editable: boolean}>`
   #icon-container{
     display: flex;
     gap: 15px;
-    i{
+    #pencil, #trash{
       cursor: pointer;
     }
   }

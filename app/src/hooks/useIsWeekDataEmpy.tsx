@@ -1,12 +1,12 @@
-import useWeekStatistics from "./useWeekStatistics";
 import useFormattedDate from "./useFormattedDate";
 import { filter, isEmpty } from "lodash";
 import { useMemo } from "react";
+import { useStore } from "../store";
 
 const useIsWeekDataEmpy = (date: Date) => {
-  const data = useWeekStatistics();
+  const {schedule} = useStore(state => state)
   const formattedDate = useFormattedDate(date)
-  const dataValidator = useMemo(() => filter(data, (item) => item.date === String(formattedDate)),[data, formattedDate])
+  const dataValidator = useMemo(() => filter(schedule, (item) => item.date === String(formattedDate)),[schedule, formattedDate])
   return isEmpty(dataValidator)
 };
 
