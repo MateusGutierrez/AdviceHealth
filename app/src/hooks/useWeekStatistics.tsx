@@ -1,7 +1,7 @@
-import { useStore } from "../store";
+import { useStore } from '../store';
 
 const useWeekStatistics = () => {
-  const {weekStatistics} = useStore(state => state)
+  const { weekStatistics } = useStore((state) => state);
   return weekStatistics;
 };
 

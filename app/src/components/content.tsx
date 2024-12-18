@@ -6,11 +6,7 @@ interface ContentProps {
 }
 
 const Content: React.FC<ContentProps> = ({ children, className = '' }) => {
-  return (
-    <div className={`vh-100 container py-4 ${className}`}>
-      {children}
-    </div>
-  );
+  return <div className={`vh-100 container py-4 ${className}`}>{children}</div>;
 };
 
 export default Content;

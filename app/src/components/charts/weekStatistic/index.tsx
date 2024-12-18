@@ -8,72 +8,70 @@ import { ChartsAxisHighlight } from '@mui/x-charts/ChartsAxisHighlight';
 import { axisClasses } from '@mui/x-charts/ChartsAxis';
 import { useChartData } from '../useChartData';
 
-
 const WeekChart = () => {
-  const { weekSeries,weekStatistics } = useChartData();
+  const { weekSeries, weekStatistics } = useChartData();
   return (
-      <ResponsiveChartContainer
-        series={weekSeries}
-        margin={{ top: 10 }}
-        xAxis={[
-          {
-            id: 'date',
-            data: weekStatistics.map((day) => new Date(day.date)),
-            scaleType: 'band',
-            valueFormatter: (value) => value.toLocaleDateString(),
+    <ResponsiveChartContainer
+      series={weekSeries}
+      margin={{ top: 10 }}
+      xAxis={[
+        {
+          id: 'date',
+          data: weekStatistics.map((day) => new Date(day.date)),
+          scaleType: 'band',
+          valueFormatter: (value) => value.toLocaleDateString(),
+        },
+      ]}
+      yAxis={[
+        {
+          id: 'appointments',
+          scaleType: 'linear',
+          label: 'Appointments',
+        },
+        {
+          id: 'revenue',
+          scaleType: 'linear',
+          label: 'Revenue (R$)',
+          valueFormatter: (value) => `R$${value.toLocaleString()}`,
+        },
+      ]}
+    >
+      <ChartsAxisHighlight x="line" />
+      <BarPlot />
+      <LinePlot />
+      <LineHighlightPlot />
+      <ChartsXAxis
+        label="Date"
+        position="bottom"
+        axisId="date"
+        tickLabelStyle={{
+          fontSize: 10,
+        }}
+      />
+      <ChartsYAxis
+        label="Appointments"
+        position="left"
+        axisId="appointments"
+        tickLabelStyle={{ fontSize: 10 }}
+        sx={{
+          [`& .${axisClasses.label}`]: {
+            transform: 'translateX(-5px)',
           },
-        ]}
-        yAxis={[
-          {
-            id: 'appointments',
-            scaleType: 'linear',
-            label: 'Appointments',
+        }}
+      />
+      <ChartsYAxis
+        label="Revenue (R$)"
+        position="right"
+        axisId="revenue"
+        tickLabelStyle={{ fontSize: 10 }}
+        sx={{
+          [`& .${axisClasses.label}`]: {
+            transform: 'translateX(35px)',
           },
-          {
-            id: 'revenue',
-            scaleType: 'linear',
-            label: 'Revenue (R$)',
-            valueFormatter: (value) => `R$${value.toLocaleString()}`,
-          },
-        ]}
-      >
-        <ChartsAxisHighlight x="line" />
-        <BarPlot />
-        <LinePlot />
-        <LineHighlightPlot />
-        <ChartsXAxis
-          label="Date"
-          position="bottom"
-          axisId="date"
-          tickLabelStyle={{
-            fontSize: 10,
-          }}
-        />
-        <ChartsYAxis
-          label="Appointments"
-          position="left"
-          axisId="appointments"
-          tickLabelStyle={{ fontSize: 10 }}
-          sx={{
-            [`& .${axisClasses.label}`]: {
-              transform: 'translateX(-5px)',
-            },
-          }}
-        />
-        <ChartsYAxis
-          label="Revenue (R$)"
-          position="right"
-          axisId="revenue"
-          tickLabelStyle={{ fontSize: 10 }}
-          sx={{
-            [`& .${axisClasses.label}`]: {
-              transform: 'translateX(35px)',
-            },
-          }}
-
-        />
-        <ChartsTooltip />
-      </ResponsiveChartContainer>
+        }}
+      />
+      <ChartsTooltip />
+    </ResponsiveChartContainer>
   );
-}
+};
 export default WeekChart;

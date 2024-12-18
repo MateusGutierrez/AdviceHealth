@@ -12,7 +12,7 @@ const style = {
   transform: 'translate(-50%, -50%)',
   width: '50%',
   maxWidth: '600px',
-  maxHeight: "95%",
+  maxHeight: '95%',
   bgcolor: 'background.paper',
   boxShadow: 24,
   borderRadius: '15px',
@@ -20,12 +20,12 @@ const style = {
 };
 
 const BasicModal = () => {
-  const {isVisible, hide, show} = useIsVisible()
+  const { isVisible, hide, show } = useIsVisible();
 
   return (
     <StyledContainer>
-      <Button onClick={show} id='button-icon'>
-        <i className="bi bi-person-add text-light" id="plus"/>
+      <Button onClick={show} id="button-icon">
+        <i className="bi bi-person-add text-light" id="plus" />
       </Button>
       <Modal
         open={isVisible}
@@ -34,10 +34,10 @@ const BasicModal = () => {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-            <AddPatientToScheduleForm hide={hide}/>
+          <AddPatientToScheduleForm hide={hide} />
         </Box>
       </Modal>
     </StyledContainer>
   );
-}
+};
 export default BasicModal;

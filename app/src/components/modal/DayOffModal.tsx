@@ -1,9 +1,9 @@
-import { DateCalendar } from "@mui/x-date-pickers";
-import dayjs, { Dayjs } from "dayjs";
-import { useStore } from "../../store";
-import Box from "@mui/material/Box";
-import Modal from "@mui/material/Modal";
-import useIsVisible from "../../hooks/useIsVisible";
+import { DateCalendar } from '@mui/x-date-pickers';
+import dayjs, { Dayjs } from 'dayjs';
+import { useStore } from '../../store';
+import Box from '@mui/material/Box';
+import Modal from '@mui/material/Modal';
+import useIsVisible from '../../hooks/useIsVisible';
 import {
   Button,
   FormControl,
@@ -11,37 +11,38 @@ import {
   MenuItem,
   Select,
   SelectChangeEvent,
-} from "@mui/material";
-import StyledContainer from "./styled";
-import { useCallback, useMemo, useState } from "react";
-import { filter, head, map } from "lodash";
-import { toast } from "react-toastify";
-import useFormattedDate from "../../hooks/useFormattedDate";
+} from '@mui/material';
+import StyledContainer from './styled';
+import { useCallback, useMemo, useState } from 'react';
+import { filter, head, map } from 'lodash';
+import { toast } from 'react-toastify';
+import useFormattedDate from '../../hooks/useFormattedDate';
 
 const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: "50%",
-  maxWidth: "600px",
-  maxHeight: "95%",
-  bgcolor: "background.paper",
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: '50%',
+  maxWidth: '600px',
+  maxHeight: '95%',
+  bgcolor: 'background.paper',
   boxShadow: 24,
-  borderRadius: "15px",
+  borderRadius: '15px',
   p: 4,
 };
 
 const DayOffModal = () => {
   const { isVisible, hide, show } = useIsVisible();
-  const { dayOff, setDayOff, doctorsSchedule, destroyOneDayOffSchedule } = useStore((state) => state);
-  const [doctor, setDoctor] = useState("");
+  const { dayOff, setDayOff, doctorsSchedule, destroyOneDayOffSchedule } =
+    useStore((state) => state);
+  const [doctor, setDoctor] = useState('');
   const formatedDay = useFormattedDate(new Date(dayOff as string));
 
   const click = useCallback(() => {
     destroyOneDayOffSchedule(doctor, formatedDay);
     hide();
-    toast.success("Success", { autoClose: 2500 });
+    toast.success('Success', { autoClose: 2500 });
   }, [destroyOneDayOffSchedule, doctor, formatedDay, hide]);
 
   const handleDoctorChange = useCallback((e: SelectChangeEvent) => {
@@ -51,7 +52,8 @@ const DayOffModal = () => {
   const availableDays = useMemo(() => {
     return doctor
       ? Object.keys(
-          head(filter(doctorsSchedule, (d) => d.doctorName === doctor))?.weeklyAvailableSlots || {}
+          head(filter(doctorsSchedule, (d) => d.doctorName === doctor))
+            ?.weeklyAvailableSlots || {}
         )
       : [];
   }, [doctor, doctorsSchedule]);
@@ -59,7 +61,7 @@ const DayOffModal = () => {
   const shouldDisableDate = useCallback(
     (date: Dayjs | null) => {
       if (!date) return true;
-      const dayString = date.format("YYYY-MM-DD");
+      const dayString = date.format('YYYY-MM-DD');
       return !availableDays.includes(dayString);
     },
     [availableDays]

@@ -1,6 +1,4 @@
-import { DashboardContainer } from "../components/dashboardContainer";
+import { DashboardContainer } from '../components/dashboardContainer';
 
-const Dashboard = () => (
-    <DashboardContainer />
-)
+const Dashboard = () => <DashboardContainer />;
 export default Dashboard;

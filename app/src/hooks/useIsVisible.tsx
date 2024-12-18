@@ -11,7 +11,7 @@ const useIsVisible = (initialState = false): IsVisibleType => {
   const [isVisible, setIsVisible] = useState(initialState);
 
   const toggle = useCallback(() => {
-    setIsVisible(visible => !visible);
+    setIsVisible((visible) => !visible);
   }, [setIsVisible]);
   const show = useCallback(() => {
     setIsVisible(true);
@@ -25,7 +25,7 @@ const useIsVisible = (initialState = false): IsVisibleType => {
       isVisible,
       toggle,
       show,
-      hide
+      hide,
     }),
     [isVisible, toggle, show, hide]
   );

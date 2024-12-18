@@ -1,6 +1,4 @@
-import { SchedulingContainer } from "../components/schedulingContainer";
+import { SchedulingContainer } from '../components/schedulingContainer';
 
-const Scheduling = () => (
-    <SchedulingContainer />
-)
+const Scheduling = () => <SchedulingContainer />;
 export default Scheduling;

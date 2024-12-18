@@ -1,6 +1,4 @@
-import SchedulingViewContainer from "../components/schedulingViewContainer";
+import SchedulingViewContainer from '../components/schedulingViewContainer';
 
-const SchedulingView = () => (
-    <SchedulingViewContainer />
-)
+const SchedulingView = () => <SchedulingViewContainer />;
 export default SchedulingView;
